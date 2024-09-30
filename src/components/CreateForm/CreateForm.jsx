@@ -18,9 +18,9 @@ export default function CreateForm({ onCreate }) {
     }
 
     return (
-        <div className='container col-12 col-md-6 bg-body-tertiary shadow rounded mx-auto mb-5 p-3'>
+        <div className='container col-12 col-sm-8 col-md-4 bg-body-tertiary shadow rounded mx-auto mb-5 p-3'>
             <h3 className='fw-light'>
-                <span className='badge text-bg-success'>GET</span> Add New User
+                <span className='badge text-bg-primary'>POST</span> Add New User
             </h3>
             <hr />
             <div className='form-group mb-3'>
@@ -45,7 +45,10 @@ export default function CreateForm({ onCreate }) {
                 <input type='text' name='job' id='job' className='form-control' value={ job } onChange={e => setJob(e.target.value)} required />
             </div>
             <div className='d-flex justify-content-end gap-1'>
-                <button className='btn btn-primary' type='button' onClick={ handleClick } >Add</button>
+                {
+                    (name && email && job) &&
+                    <button className='btn btn-primary' type='button' onClick={ handleClick } >Add</button>
+                }
                 <button className='btn btn-outline-secondary' type='reset' onClick={ handleReset }>Reset</button>
             </div>
         </div>

@@ -1,6 +1,9 @@
 export default function UserTable({ children }) {
     return (
         <div className='col-12 col-md-8 table-responsive mx-auto'>
+            <h5 className='h5 bg-success-subtle mb-0 p-2'>
+                <span className='badge text-bg-success'>GET</span> Users List
+            </h5>
             <table className='table table-bordered table-hover'>
                 <thead>
                     <tr>
@@ -12,7 +15,7 @@ export default function UserTable({ children }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {children}
+                    { children }
                 </tbody>
             </table>
         </div>

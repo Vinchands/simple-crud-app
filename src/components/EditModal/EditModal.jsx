@@ -50,7 +50,7 @@ export default function EditModal({ user, onSave }) {
                             <input type='text' name='job' className='form-control' value={newJob} onChange={e => setNewJob(e.target.value)} required />
                         </div>
                         <div className='d-flex justify-content-end gap-1'>
-                            <button className='btn btn-success' type='button' onClick={ handleClick } >Save</button>
+                            <button className='btn btn-success' type='button' data-bs-dismiss='modal' onClick={ handleClick } >Save</button>
                             <button className='btn btn-outline-secondary' type='reset' onClick={ handleReset }>Reset</button>
                         </div>
                     </div>

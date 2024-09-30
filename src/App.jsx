@@ -1,5 +1,6 @@
 import CreateForm from './components/CreateForm/CreateForm'
 import UserTable from './components/UserTable/UserTable'
+import UserRow from './components/UserRow/UserRow'
 import EditModal from './components/EditModal/EditModal'
 import DeleteModal from './components/DeleteModal/DeleteModal'
 import { useState, useEffect } from 'react'
@@ -55,7 +56,7 @@ export default function App() {
             .catch(error => console.error('Error creating user:', error))
     }
 
-    function handleUpdate(id, name, email, job) {
+    async function handleUpdate(id, name, email, job) {
         const option = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -70,7 +71,7 @@ export default function App() {
            .catch(error => console.error('Error updating user:', error))
     }
 
-    function handleDelete(id) {
+    async function handleDelete(id) {
         const option = {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
@@ -99,28 +100,20 @@ export default function App() {
                     users.length === 0
                     ? (
                         <tr>
-                            <td colSpan='5' className='text-center'>No users found</td>
+                            <td colSpan='5' className='h3 text-center'>No users found</td>
                         </tr>
                     )
                     : users.map(user => (
-                        <tr key={ user.id }>
-                            <td>{ user.id }</td>
-                            <td>{ user.name }</td>
-                            <td>{ user.email }</td>
-                            <td>{ user.job }</td>
-                            <td>
-                                <div className='d-flex gap-1'>
-                                    <button className='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target={ `#edit-modal-${user.id}` }>
-                                        <i className='bi bi-pencil-fill'></i>
-                                    </button>
-                                    <button className='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target={ `#delete-modal-${user.id}` }>
-                                        <i className='bi bi-trash-fill'></i>
-                                    </button>
-                                    <EditModal user={ user } onSave={ handleUpdate } />
-                                    <DeleteModal id={ `${user.id}` } onDelete={ handleDelete } />
-                                </div>
-                            </td>
-                        </tr>
+                        <UserRow key={ user.id } user={ user }>
+                            <button className='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target={ `#edit-modal-${user.id}` }>
+                                <i className='bi bi-pencil-fill'></i>
+                            </button>
+                            <button className='btn btn-danger btn-sm' data-bs-toggle='modal' data-bs-target={ `#delete-modal-${user.id}` }>
+                                <i className='bi bi-trash-fill'></i>
+                            </button>
+                            <EditModal user={ user } onSave={ handleUpdate } />
+                            <DeleteModal id={ `${user.id}` } onDelete={ handleDelete } />
+                        </UserRow>
                     ))
                 }
             </UserTable>
